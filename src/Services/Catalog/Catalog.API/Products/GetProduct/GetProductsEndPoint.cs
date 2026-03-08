@@ -14,7 +14,13 @@ namespace Catalog.API.Products.GetProducts
                 var response = result.Adapt<GetProductsResponse>();
                 
                 return Results.Ok(response);
-            });
+            })
+            .WithName("GetProducts")
+            .WithTags("Products")
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Get Products")
+            .WithDescription("Retrieves a list of products.")   ;
         }
+
     }
 }
