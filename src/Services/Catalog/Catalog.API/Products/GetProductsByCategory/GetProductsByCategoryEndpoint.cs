@@ -1,4 +1,6 @@
-﻿namespace Catalog.API.Products.GetProductsByCategory
+﻿using Catalog.API.Products.GetProductByCategory;
+
+namespace Catalog.API.Products.GetProductsByCategory
 {
     public record GetProductsByCategoryResponse(IEnumerable<Product> Products);
     public class GetProductsByCategoryEndpoint : ICarterModule
@@ -7,7 +9,7 @@
         {
             app.MapGet("/products/category/{category}", async (string category, ISender sender) =>
             {
-                var result = await sender.Send(new GetProductsByCategoryQuery(category));
+                var result = await sender.Send(new GetProductByCategoryQuery(category));
                 var response = result.Adapt<GetProductsByCategoryResponse>();
                 return Results.Ok(response);
             })
